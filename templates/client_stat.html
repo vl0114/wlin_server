@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ client_info.name }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid">
+
+<div class="row header-wrapper p-0"> <!-- 변경 필요 [색상] -->
+        <div class="col-sm-12 p-0">
+            <nav class="navbar navbar-expand navbar-light" style="background-color: #f0f0f0"> <!-- 변경 필요 [색상] -->
+
+                <div style="margin-left: 1rem"></div>
+                <a class="navbar-brand" href="/">WLin</a>
+
+
+            </nav>
+
+
+        </div>
+    </div>
+    <div class="row">
+            <h2>PROCESS</h2>
+        </div>
+            <div class="row">
+                {% for i in client_info.get_proc_stat()["procs"] %}
+                    <div style="background-color: #f2f2f2; padding: 10px; margin: 10px 0 10px 10px; min-width: 200px">
+                        <h2>{{ i.name.replace('(', '').replace(')', '') }}</h2>
+                        {{i.pid}}<br>
+                        {{i.state}}
+                    </div>
+
+
+                {% endfor %}
+            </div>
+
+            <h2> </h2>
+                <h2>CPU</h2>
+                <div class="row">
+                <div style="background-color: #f2f2f2; margin: 10px 10px 10px 10px;padding: 10px;">
+                1min load : {{ client_info.get_cpu_stat()["load1"] }}<br>
+                10min load: {{ client_info.get_cpu_stat()["load5"] }}<br>
+                15min load: {{ client_info.get_cpu_stat()["load15"] }}
+                </div></div>
+                <div class="row">
+
+                {% for i in client_info.get_cpu_stat()["cpus"] %}
+
+                    <div class="col-xs-6" style="background-color: #f2f2f2; padding: 10px; margin: 10px 10px 10px 10px;">
+                        <h2>{{ i.id }}</h2>
+                        vendor: {{ i.vendor}}<br>
+                        model: {{ i.model }}<br>
+                        freq: {{ i.hz }}<br>
+                        cache: {{ i.cache }}<br>
+                        core_id: {{ i.core_id }}<br>
+                        physics: {{ i.physics_id }}<br>
+                        cores: {{ i.cores }}
+                    </div>
+
+
+                {% endfor %}
+            </div>
+
+<div class="row">
+            <h2>MEMORY</h2>
+        </div>
+            <div class="row">
+                {% for i in client_info.get_proc_stat()["procs"] %}
+                    <div style="background-color: #f2f2f2; padding: 10px; margin: 10px 0 10px 10px; min-width: 200px">
+                        <h2>{{ i.name.replace('(', '').replace(')', '') }}</h2>
+                        {{i.pid}}<br>
+                        {{i.state}}
+                    </div>
+
+
+                {% endfor %}
+            </div>
+
+            <h2> </h2>
+                <h2>MEM</h2>
+                <div class="row">
+                <div style="background-color: #f2f2f2; margin: 10px 10px 10px 10px;padding: 10px;">
+                mem total : {{ client_info.get_mem_stat()["total"] }}<br>
+                use : {{ mu }}%<br>
+                swap total : {{ client_info.get_mem_stat()["total_swap"] }}<br>
+                use : {{ su }}%
+                </div></div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
